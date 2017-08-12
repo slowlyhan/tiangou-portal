@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tiangou.common.utils.CookieUtils;
 import com.tiangou.common.utils.JsonUtils;
 import com.tiangou.portal.service.ContentService;
 
@@ -31,7 +34,6 @@ public class IndexController {
 
 	@RequestMapping("/index")
 	public String showIndex(Model model) {
-		
 		String json = contentService.getAd1List();
 		model.addAttribute("ad1", json);
 		return "index";

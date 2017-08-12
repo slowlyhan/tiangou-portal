@@ -5,21 +5,44 @@ var TT = TAOTAO = {
 			return ;
 		}
 		$.ajax({
-			url : "http://sso.taotao.com/user/token/" + _ticket,
+			url : "http://localhost:8084/user/token/" + _ticket,
 			dataType : "jsonp",
 			type : "GET",
 			success : function(data){
 				if(data.status == 200){
 					var username = data.data.username;
-					var html = username + "，欢迎来到淘淘！<a href=\"http://www.taotao.com/user/logout.html\" class=\"link-logout\">[退出]</a>";
+					//var html = username + "，欢迎来到淘淘！<a href=\"http://localhost:8084/user/logout\" class=\"link-logout\">[退出]</a>";
+					var html = username + "，欢迎来到淘淘！<a href=\"javascript:TT.logout()\">[退出]</a>";
+
+					
 					$("#loginbar").html(html);
 				}
 			}
 		});
+	},
+	logout : function() {
+		$.ajax({
+			url : "http://localhost:8084/user/logout",
+			dataType : "jsonp",
+			type : "GET",
+			success : function(data){
+				//if(data.status == 200){
+					//var username = data.data.username;
+					//var html = username + "，欢迎来到淘淘！<a href=\"http://localhost:8084/user/logout\" class=\"link-logout\">[退出]</a>";
+					var html = "您好！欢迎来到淘淘！<a href=\"javascript:login()\">[登录]</a>&nbsp;<a href=\"javascript:regist()\">[免费注册]</a>";
+	
+					
+					$("#loginbar").html(html);
+				//}
+			}
+		});
 	}
+
 }
 
 $(function(){
 	// 查看是否已经登录，如果已经登录查询登录信息
 	TT.checkLogin();
 });
+
+
